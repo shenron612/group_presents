@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Issues Report — HireLink</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0d0d0d;
+    --yellow: #F5C518;
+    --yellow-dark: #d4aa10;
+    --white: #ffffff;
+    --grey: #1a1a1a;
+    --grey-border: #2a2a2a;
+    --text-muted: #888;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    border-bottom: 1px solid var(--grey-border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .logo span { color: var(--yellow); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+
+  .btn-sign-in {
+    background: transparent;
+    border: 1px solid var(--grey-border);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .btn-sign-in:hover { border-color: #555; }
+
+  .btn-get-started {
+    background: var(--yellow);
+    border: none;
+    color: #000;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-get-started:hover { background: var(--yellow-dark); }
+
+  /* PAGE */
+  .page {
+    max-width: 680px;
+    margin: 72px auto 0;
+    padding: 0 24px 80px;
+  }
+
+  .page-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--yellow);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 80px);
+    line-height: .95;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .page-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 52px;
+    max-width: 480px;
+  }
+
+  /* FORM */
+  .form { display: flex; flex-direction: column; gap: 28px; }
+
+  .field { display: flex; flex-direction: column; gap: 8px; }
+
+  .field label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    background: var(--grey);
+    border: 1px solid var(--grey-border);
+    color: var(--white);
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: #444;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.12);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+  }
+
+  /* Custom select arrow */
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--text-muted);
+  }
+  .select-wrap select { width: 100%; cursor: pointer; }
+  .select-wrap select option { background: #1a1a1a; }
+
+  /* Two-col row */
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--grey-border);
+    margin: 4px 0;
+  }
+
+  /* Submit */
+  .btn-submit {
+    background: var(--yellow);
+    color: #000;
+    border: none;
+    padding: 16px 36px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    width: fit-content;
+    transition: background .2s, transform .15s;
+  }
+  .btn-submit:hover {
+    background: var(--yellow-dark);
+    transform: translateY(-1px);
+  }
+  .btn-submit:active { transform: translateY(0); }
+
+  /* Success toast */
+  .toast {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    background: var(--grey);
+    border: 1px solid var(--yellow);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--white);
+    margin-top: 20px;
+  }
+  .toast .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--yellow);
+    flex-shrink: 0;
+  }
+  .toast.show { display: flex; animation: fadeIn .3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">HIRE<span>LINK</span></a>
+  <ul class="nav-links">
+    <li><a href="#">How it Works</a></li>
+    <li><a href="#">Browse Talent</a></li>
+    <li><a href="#">All Profiles</a></li>
+    <li><a href="#">HireLink Care</a></li>
+    <li><a href="#">Profile</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-sign-in">Sign In</button>
+    <button class="btn-get-started">Get Started</button>
+  </div>
+</nav>
+
+<div class="page">
+  <p class="page-eyebrow">Support</p>
+  <h1 class="page-title">ISSUES<br>REPORT</h1>
+  <p class="page-subtitle">Run into something unexpected? Let us know and our team will get back to you as quickly as possible.</p>
+
+  <form class="form" id="reportForm" onsubmit="handleSubmit(event)">
+    <div class="row">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Jane Smith" required />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="jane@example.com" required />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="department">Department</label>
+      <div class="select-wrap">
+        <select id="department">
+          <option>Science Department</option>
+          <option>Engineering</option>
+          <option>Marketing</option>
+          <option>Finance</option>
+          <option>Human Resources</option>
+          <option>Operations</option>
+          <option>Legal</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="field">
+      <label for="comment">Comment</label>
+      <textarea id="comment" placeholder="Describe the issue in detail…" required></textarea>
+    </div>
+
+    <button type="submit" class="btn-submit">Submit Report</button>
+
+    <div class="toast" id="toast">
+      <span class="dot"></span>
+      Report submitted successfully. We'll be in touch soon.
+    </div>
+  </form>
+</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    e.target.reset();
+    setTimeout(() => toast.classList.remove('show'), 5000);
+  }
+</script>
+</body>
+</html>

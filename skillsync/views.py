@@ -219,3 +219,5 @@ def about(request):
     Renders the standalone About page.
     """
     return render(request, 'about.html')
+def report_issues(request):
+    return render(request, 'report_issues.html')
