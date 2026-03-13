@@ -14,11 +14,6 @@ from django.views.decorators.csrf import csrf_exempt
 from skillsync.forms import RegisterForm
 from skillsync.models import User
 
-
-# ─────────────────────────────────────────────
-#  CORE AUTH VIEWS
-# ─────────────────────────────────────────────
-
 def dashboard(request):
     profiles = User.objects.all().order_by('-date_joined')
     return render(request, 'dashboard.html', {
@@ -69,11 +64,6 @@ def user_logout(request):
     logout(request)
     return redirect('dashboard')
 
-
-# ─────────────────────────────────────────────
-#  WORKER SEARCH
-# ─────────────────────────────────────────────
-
 def search_workers(request):
     query = request.GET.get('q', '').strip()
     users = []
@@ -100,11 +90,6 @@ def search_workers(request):
         ]
     })
 
-
-# ─────────────────────────────────────────────
-#  M-PESA HELPERS
-# ─────────────────────────────────────────────
-
 def get_mpesa_token():
     consumer_key    = settings.MPESA_CONSUMER_KEY
     consumer_secret = settings.MPESA_CONSUMER_SECRET
@@ -123,11 +108,6 @@ def get_password_and_timestamp():
     raw       = f"{shortcode}{passkey}{timestamp}"
     password  = base64.b64encode(raw.encode()).decode()
     return password, timestamp
-
-
-# ─────────────────────────────────────────────
-#  PAYMENT VIEWS
-# ─────────────────────────────────────────────
 
 @login_required
 def make_payment(request):
@@ -214,10 +194,55 @@ def mpesa_callback(request):
         except Exception as e:
             print(f"Callback error: {e}")
     return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'})
+# <<<<<<< HEAD
+
+
+def terms(request):
+    return render(request, 'terms.html')
+# =======
 def about(request):
     """
     Renders the standalone About page.
     """
     return render(request, 'about.html')
+# <<<<<<< HEAD
 def report_issues(request):
     return render(request, 'report_issues.html')
+# =======
+
+def terms(request):
+    return render(request, 'terms.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def careers(request):
+    return render(request, 'careers.html')
+
+def privacy(request):
+    return render(request, 'privacy.html')
+
+def report_dispute(request):
+    return render(request, 'report_dispute.html', {'user': request.user})
+
+def hirelink_care(request):
+    return render(request, 'hirelink_care.html', {'user': request.user})
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        try:
+            data     = json.loads(request.body)
+            password = data.get('password', '')
+            user     = authenticate(request, username=request.user.email, password=password)
+            if user is not None:
+                logout(request)
+                user.delete()
+                return JsonResponse({'success': True})
+            else:
+                return JsonResponse({'success': False, 'error': 'Incorrect password.'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    return redirect('dashboard')
+# >>>>>>> 23f9f77d03f598fdb5edfb89caa2bc65f8658ac7
+# >>>>>>> refs/remotes/origin/master

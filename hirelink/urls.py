@@ -12,6 +12,20 @@ urlpatterns = [
     path('make-payment/', views.make_payment, name='make_payment'),
     path('stk-push/', views.stk_push, name='stk_push'),
     path('mpesa-callback/', views.mpesa_callback, name='mpesa_callback'),
+# <<<<<<< HEAD
+    path('terms/', views.terms, name='terms'),
+# =======
     path('about/', views.about, name='about'),
+# <<<<<<< HEAD
     path('report_issues/', views.report_issues, name='report_issues'),
+# =======
+    path('terms/', views.terms, name='terms'),
+    path('contact/', views.contact, name='contact'),
+    path('careers/', views.careers, name='careers'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('hirelink-care/', views.hirelink_care, name='hirelink_care'),
+    path('report-dispute/', views.report_dispute, name='report_dispute'),
+    path('delete-account/', views.delete_account, name='delete_account'),
+# >>>>>>> 23f9f77d03f598fdb5edfb89caa2bc65f8658ac7
+# >>>>>>> refs/remotes/origin/master
 ]
