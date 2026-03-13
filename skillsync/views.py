@@ -214,3 +214,7 @@ def mpesa_callback(request):
         except Exception as e:
             print(f"Callback error: {e}")
     return JsonResponse({'ResultCode': 0, 'ResultDesc': 'Accepted'})
+
+
+def terms(request):
+    return render(request, 'terms.html')
