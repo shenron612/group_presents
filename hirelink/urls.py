@@ -26,6 +26,4 @@ urlpatterns = [
     path('hirelink-care/', views.hirelink_care, name='hirelink_care'),
     path('report-dispute/', views.report_dispute, name='report_dispute'),
     path('delete-account/', views.delete_account, name='delete_account'),
-# >>>>>>> 23f9f77d03f598fdb5edfb89caa2bc65f8658ac7
-# >>>>>>> refs/remotes/origin/master
 ]

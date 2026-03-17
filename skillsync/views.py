@@ -245,4 +245,7 @@ def delete_account(request):
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
     return redirect('dashboard')
 # >>>>>>> 23f9f77d03f598fdb5edfb89caa2bc65f8658ac7
+# <<<<<<< Updated upstream
 # >>>>>>> refs/remotes/origin/master
+# =======
+# >>>>>>> Stashed changes
