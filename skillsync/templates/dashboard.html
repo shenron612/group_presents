@@ -188,7 +188,7 @@
         </div>
       </div>
 
-      {% if user.is_authenticated and p.id != user.id %}
+      {% if user.is_authenticated and p.id != user.id and p.role == 'worker' %}
       <button class="btn-hire fp-hire-btn" onclick="window.location.href='/make-payment/?worker_id={{ p.id }}'">
         Hire {{ p.full_name|truncatechars:10 }}
       </button>
